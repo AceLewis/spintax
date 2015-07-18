@@ -1,6 +1,12 @@
 # spintax
 A module for parsing spintax, unlike any other modules this allows the user to escape the special characters used.
 
+# How to Install
+
+Install by downloading the folder or cloning the repository and running:
+
+    python setup.py install
+    
 # What is spintax
 Spintax also known as spin syntax is a way to generate strings that are unique but have the same or simmilar meaning, this can be used in chat bots to reply with pre created response and not have the responses be all the same.
 
@@ -59,3 +65,7 @@ To parse the example string of "{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!
  
     import spintax
     spintax.parse(r"{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!|}",NumberOfSpins=3,Seed=5)
+    
+# Regex help
+
+I would like to say that http://regex101.com helped me a lot with the creation of the Regex, if you need to make Regex I recommend using it as it is a great tool. They also have an IRC channel that is friendly and the user OnlineCop helped me with the non capturing group I used to match the spintax brackets.
