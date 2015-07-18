@@ -41,3 +41,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+spintax.egg-info/PKG-INFO
+*.txt
+spintax/__pycache__/__init__.cpython-34.pyc
+*.pyc
+dist/spintax-0.1-py3.4.egg
+spintax.egg-info/not-zip-safe
+build/lib/spintax/__init__.py
