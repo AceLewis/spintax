@@ -1,76 +1,77 @@
 """
 This is my first python project, if you find any errors please submit a push request on GitHub
-I have not looked at PEP 8 so please also tell me how I should write as I am almost certainly 
+I have not looked at PEP 8 so please also tell me how I should write as I am almost certainly
 not following the recommended standards
-
 """
 
 import re
 import random
 
-def ReplaceAllLiterals(String):
+def replace_literals(string):
     """
     Replace the literal characters that are used if the string needs to
     output a {spintax|string} without spinnning it or put a \ before a { or }.
     """
     # Removes double \'s only before a |, {,or }.
-    String = re.sub(re.compile(r'\\{2}(?=(?:\\{2})*[|{}])'), r'\\' ,String)
+    string = re.sub(r'\\{2}(?=(?:\\{2})*[|{}])', r'\\', string)
     # Replaces the literal |, {,and }.
-    String = re.sub(re.compile(r'\\{'), r'{' ,String)
-    String = re.sub(re.compile(r'\\}'), r'}' ,String)
-    String = re.sub(re.compile(r'\\\|'), r'|' ,String)
-    return String
+    string = re.sub(r'\\{', r'{', string)
+    string = re.sub(r'\\}', r'}', string)
+    string = re.sub(r'\\\|', r'|', string)
+    return string
 
-def ReplaceOneBracket(String,NumberOfBackSlashes=None,RegexSeperator=None,RegexBracket=None):
+def replace_a_bracket(string, number_of_escapes=None, regex_seperator=None, regex_bracket=None):
     """
-    Go through the string once and replace one bracket of the spintax with a word from within it.
+    Go through the string once and replace one bracket of the spintax with
+    a word from within the braket that is seperated by a "|".
     """
-    # Find the max number of \'s in a block and save it so it does not need to be re-calculated each time
-    if NumberOfBackSlashes == None:
-        try: 
+    # Find the max number of \'s in a block and save it so it does not need to be re-calculated
+    if number_of_escapes == None:
+        try:
             # find the maximum number of \'s in a block
-            NumberOfBackSlashes = len(max(re.findall(re.compile(r'\\+'), String), key=len)) 
+            number_of_escapes = len(max(re.findall(re.compile(r'\\+'), string), key=len))
         except ValueError: # If ValueError none were found
-            NumberOfBackSlashes = 0
+            number_of_escapes = 0
         except:
             raise
         # Compile Regex's only once to save time
-        # I am not using the .format as when I try to put the {} into the Regex it messed up and % is easier
-        RegexSeperator = re.compile("|".join(["(?<!\{)(?<=(?<!\\\\)\\\\{%s})(\|)" % x for x in range(0,NumberOfBackSlashes+1,2)]))
-        RegexBracket = re.compile(r'(?<!\\)((?:\\{2})*)\{([^}{}]+)(?<!\\)((?:\\{2})*)\}')
+        # I am not using .format as when I try to the {} in the Regex messes up and % works
+        regex_seperator = re.compile("|".join(["(?<!\{)(?<=(?<!\\\\)\\\\{%s})(\|)" % x for x in range(0, number_of_escapes+1, 2)]))
+        regex_bracket = re.compile(r'(?<!\\)((?:\\{2})*)\{([^}{}]+)(?<!\\)((?:\\{2})*)\}')
     # Uses the compiled Regex to find one bracket
-    OneBracket = re.search(RegexBracket, String)
+    one_bracket = re.search(regex_bracket, string)
     try:
-        # Find the first { as the regex matches "{word}" and also "\\{word}" 
-        ResultToStrip = OneBracket.group(0).find("{")
+        # Find the first { as the regex matches "{word}" and also "\\{word}"
+        pre_slashes = one_bracket.group(0).find("{")
         # Gives a list of the words from ones in the braket it also removes the None types
         # [0::2] is used as the split will contain the "|"'s on the odd numbers
-        ListOfStrings = [x for x in RegexSeperator.split(OneBracket.group(0)[ResultToStrip:][1:-1]) if x is not None][0::2]
+        list_of_strings = [x for x in regex_seperator.split(one_bracket.group(0)[pre_slashes:][1:-1]) if x is not None][0::2]
     except AttributeError: # AttributeError if no bracket is found
         # Replace all the literals used in the string
-        return ReplaceAllLiterals(String)
+        return replace_literals(string)
     except:
         raise
     # Find a random word from the list to replace the bracket with
-    StringToReplace = random.choice(ListOfStrings)
+    string_to_replace = random.choice(list_of_strings)
     # Replace the bracket with the word and add the appropriate "\"'s before the word
-    String = re.sub(RegexBracket, "\\"*ResultToStrip+StringToReplace ,String ,1)
+    string = re.sub(regex_bracket, "\\"*pre_slashes+string_to_replace, string, 1)
     # Call the function again until no more brackets are left
-    return ReplaceOneBracket(String,NumberOfBackSlashes=NumberOfBackSlashes,RegexSeperator=RegexSeperator,RegexBracket=RegexBracket)
+    return replace_a_bracket(string, number_of_escapes=number_of_escapes,
+                             regex_seperator=regex_seperator, regex_bracket=regex_bracket)
 
-def parse(String,JustString=False,NumberOfSpins=1,Seed=None):
+def parse(string, just_string=False, number_of_spins=1, seed=None):
     """
     Function used to parse the spintax string
     """
     # If the user has chosen a seed for the random numbers use it
-    if Seed!=None:
-        random.seed(Seed)
-    ReturnList = []
-    for x in range(NumberOfSpins):
-        ReturnList.append(ReplaceOneBracket(String))
+    if seed != None:
+        random.seed(seed)
+    return_list = []
+    for _ in range(number_of_spins):
+        return_list.append(replace_a_bracket(string))
     # If the user wants a string to be returned do that by joining the strings
-    if JustString == True:
-        return "\n".join(ReturnList)
+    if just_string == True:
+        return "\n".join(return_list)
     # Otherwise return the list
     else:
-        return ReturnList
+        return return_list
