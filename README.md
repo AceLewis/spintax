@@ -3,7 +3,7 @@ A module for parsing spintax, unlike any other modules this also allows the user
 
 # How to Install
 
-Install by downloading the [zipped folder](/archive/master.zip) or cloning the repository and running:
+Install by downloading the [zipped folder](/../../archive/master.zip) or cloning the repository and running:
 
     python setup.py install
     
@@ -53,7 +53,7 @@ Unlike other modules, you can escape the special character used in spintax by pl
  
 # How to use this module
  
-This module can be used to parse spin syntax multiple times and will by default return a list with the a specified number of  requested strings.
+This module can be used to parse spin syntax multiple times and will by default return a list with the a specified number of requested strings.
  
 ### Parse Function:
 
