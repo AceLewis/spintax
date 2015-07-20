@@ -1,5 +1,5 @@
 """
-This is my first python project, if you find any errors please submit a push request on GitHub
+This is my first python project, if you find any errors please submit a pull request on GitHub
 I have not looked at PEP 8 so please also tell me how I should write as I am almost certainly
 not following the recommended standards
 """
@@ -10,7 +10,7 @@ import random
 def replace_literals(string):
     """
     Replace the literal characters that are used if the string needs to
-    output a {spintax|string} without spinnning it or put a \ before a { or }.
+    output a {spintax|string} without spinning it or put a \ before a { or }.
     """
     # Removes double \'s only before a |, {,or }.
     string = re.sub(r'\\{2}(?=(?:\\{2})*[|{}])', r'\\', string)
@@ -23,7 +23,7 @@ def replace_literals(string):
 def replace_a_bracket(string, number_of_escapes=None, regex_seperator=None, regex_bracket=None):
     """
     Go through the string once and replace one bracket of the spintax with
-    a word from within the braket that is seperated by a "|".
+    a word from within the bracket that is separated by a "|".
     """
     # Find the max number of \'s in a block and save it so it does not need to be re-calculated
     if number_of_escapes == None:
@@ -43,7 +43,7 @@ def replace_a_bracket(string, number_of_escapes=None, regex_seperator=None, rege
     try:
         # Find the first { as the regex matches "{word}" and also "\\{word}"
         pre_slashes = one_bracket.group(0).find("{")
-        # Gives a list of the words from ones in the braket it also removes the None types
+        # Gives a list of the words from ones in the bracket it also removes the None types
         # [0::2] is used as the split will contain the "|"'s on the odd numbers
         list_of_strings = [x for x in regex_seperator.split(one_bracket.group(0)[pre_slashes:][1:-1]) if x is not None][0::2]
     except AttributeError: # AttributeError if no bracket is found
