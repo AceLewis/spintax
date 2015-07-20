@@ -3,7 +3,11 @@ A module for parsing spintax, unlike any other modules this also allows the user
 
 # How to Install
 
-Install by downloading the [zipped folder](/../../archive/master.zip) or cloning the repository and running:
+To install using pip run:
+
+    pip install spintax
+
+Alternatively this module can be installed by downloading the [zipped folder](/../../archive/master.zip) or cloning the repository and running:
 
     python setup.py install
     

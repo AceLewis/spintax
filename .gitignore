@@ -48,3 +48,6 @@ spintax/__pycache__/__init__.cpython-34.pyc
 dist/spintax-0.1-py3.4.egg
 spintax.egg-info/not-zip-safe
 build/lib/spintax/__init__.py
+*.pypirc
+dist/spintax-0.1.zip
+dist/spintax-0.1-py3-none-any.whl
