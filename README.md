@@ -1,5 +1,5 @@
 # spintax
-A module for parsing spintax, unlike any other modules this also allows the user to escape the special characters used in its syntax.
+A Python module for parsing spintax, unlike any other module this also allows the user to escape the special characters used in its syntax.
 
 # How to Install
 
