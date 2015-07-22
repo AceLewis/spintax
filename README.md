@@ -76,3 +76,7 @@ To parse the example string of "{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!
 # Regex help
 
 I would like to say that http://regex101.com helped me a lot with the creation of the Regex, if you need to make Regex I recommend using this website as it is a great tool. They also have an IRC channel that is friendly, and the user OnlineCop helped me with the non capturing group I used to match the spintax brackets.
+
+# Licence
+
+This software is licensed under the GNU General Public License (version 3) as published by the Free Software Foundation this licence http://www.gnu.org/licenses/ . If you would want a different licence please contact me, @_AceLewis.
