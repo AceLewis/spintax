@@ -51,3 +51,7 @@ build/lib/spintax/__init__.py
 *.pypirc
 dist/spintax-0.1.zip
 dist/spintax-0.1-py3-none-any.whl
+
+# OTHER
+
+.idea*
