@@ -81,7 +81,7 @@ def _process_string(string, number_of_escapes=None, regex_separator=None, regex_
     )
 
 
-def parse(string, just_string=False, number_of_spins=1, seed=None):
+def spin(string, just_string=False, number_of_spins=1, seed=None):
     """
     Wrapper function for `_process_string`. Uses the various kwargs to determine
     how many times the text is spun, the seed, and whether the user wants a
