@@ -83,7 +83,9 @@ def _process_string(string, number_of_escapes=None, regex_separator=None, regex_
 
 def parse(string, just_string=False, number_of_spins=1, seed=None):
     """
-    Function used to parse the spintax string
+    Wrapper function for `_process_string`. Uses the various kwargs to determine
+    how many times the text is spun, the seed, and whether the user wants a
+    string instead of a list.
 
     :param string:
     :param just_string:
