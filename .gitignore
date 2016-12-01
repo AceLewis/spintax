@@ -55,3 +55,5 @@ dist/spintax-0.1-py3-none-any.whl
 # OTHER
 
 .idea*
+dist/*
+build/*
