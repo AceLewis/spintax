@@ -59,7 +59,7 @@ Unlike other modules, you can escape the special character used in spintax by pl
  
 This module can be used to parse spin syntax multiple times and will by default return a list with the a specified number of requested strings.
  
-### Parse Function:
+### Spin Function:
 
 #####inputs:
 
@@ -68,10 +68,10 @@ This module can be used to parse spin syntax multiple times and will by default 
 * number_of_spins: (Optional) the number of times the string will be spun (Default = 1).
 * seed: (Optional) if a seed for the random function is desired a seed can be set (Default no seed).
 
-To parse the example string of "{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!|}" 3 times with the random seed of 5 you would do:
+To spin the example string of "{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!|}" 3 times with the random seed of 5 you would do:
  
     import spintax
-    spintax.parse(r"{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!|}",number_of_spins=3,seed=5)
+    spintax.spin(r"{Hey|Hello|Hi} this is {spin syntax|spintax}{.|!|}",number_of_spins=3,seed=5)
     
 # Regex help
 

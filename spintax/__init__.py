@@ -26,10 +26,9 @@ def _replace_literals(string):
     return string
 
 
-def _replace_a_bracket(string, number_of_escapes=None, regex_separator=None, regex_bracket=None):
+def _process_string(string, number_of_escapes=None, regex_separator=None, regex_bracket=None):
     """
-    Go through the string once and replace one bracket of the spintax with
-    a word from within the bracket that is separated by a "|".
+    Process a string and perform some recursion in order to spin the text.
 
     :param string:
     :param number_of_escapes:
@@ -74,7 +73,7 @@ def _replace_a_bracket(string, number_of_escapes=None, regex_separator=None, reg
     string = re.sub(regex_bracket, "\\"*pre_slashes+string_to_replace, string, 1)
 
     # Call the function again until no more brackets are left
-    return _replace_a_bracket(
+    return _process_string(
         string,
         number_of_escapes=number_of_escapes,
         regex_separator=regex_separator,
@@ -82,9 +81,11 @@ def _replace_a_bracket(string, number_of_escapes=None, regex_separator=None, reg
     )
 
 
-def parse(string, just_string=False, number_of_spins=1, seed=None):
+def spin(string, just_string=False, number_of_spins=1, seed=None):
     """
-    Function used to parse the spintax string
+    Wrapper function for `_process_string`. Uses the various kwargs to determine
+    how many times the text is spun, the seed, and whether the user wants a
+    string instead of a list.
 
     :param string:
     :param just_string:
@@ -99,7 +100,7 @@ def parse(string, just_string=False, number_of_spins=1, seed=None):
 
     return_list = []
     for _ in range(number_of_spins):
-        return_list.append(_replace_a_bracket(string))
+        return_list.append(_process_string(string))
 
     # If the user wants a string to be returned do that by joining the strings
     if just_string:
