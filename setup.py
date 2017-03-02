@@ -1,9 +1,10 @@
 from setuptools import setup
 
 setup(name='spintax',
-      version='1.0',
-      description='A python module for parsing spintax',
-      long_description='A python module for parsing spintax, it can deal with nested spintax and allows the special characters to be escaped',
+      version='1.0.1',
+      description='A Python module for parsing spintax',
+      long_description='A Python module for parsing spintax, unlike any other module this works with nested spintax and also allows the user to escape the special characters used in its syntax.',
+      keywords=['spintax', 'spin syntax', 'spintax parser', 'spinning', 'spin'],
       url='http://github.com/AceLewis/spintax',
       download_url='https://github.com/AceLewis/spintax/archive/master.zip',
       author='AceLewis',
@@ -13,6 +14,8 @@ setup(name='spintax',
           'Programming Language :: Python',
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 3',
+          'Operating System :: OS Independent',
+          'Topic :: Text Processing',
           'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
           ],
       zip_safe=False)
