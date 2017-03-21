@@ -31,7 +31,7 @@ def spin(string, seed=None):
     # Regex to find spintax seperator, defined here so it is not re-defined
     # on every call to _replace_string function
     global spintax_seperator
-    spintax_seperator = r"(?:\\.|[^\|\\])+|(?<=[^\\]\|)|(?<!.)(?=\|)|(?<!..)(?=\|)"
+    spintax_seperator = r"(?:\\.|[^\|\\])+|(?<=[^\\]\|)|(?<!.)(?=\|)|(?<!.)(?=\|)|(?<=\|)(?=\|)"
     spintax_seperator = re.compile(spintax_seperator)
 
     # Regex to find all non escaped spintax brackets
