@@ -11,6 +11,9 @@ import spintax
 
 
 class TestSpintax(unittest.TestCase):
+    def test_nothing(self):
+        self.assertEqual(spintax.spin('nothing'), 'nothing')
+
     def test_simple(self):
         self.assertIn(spintax.spin('{Hello|Hi}'), ['Hello', 'Hi'])
 
@@ -35,6 +38,15 @@ class TestSpintax(unittest.TestCase):
 
     def test_escaped_seperator_with_backslash(self):
         self.assertEqual(spintax.spin(r'{Hello\\\|Hi}'), r'Hello\|Hi')
+
+    def test_newline(self):
+        set_up = set([spintax.spin("{a\n|b\n}") for a in range(50)])
+        self.assertEqual(set_up, {'b\n', 'a\n'})
+
+    def test_escaped_pipe_at_end(self):
+        set_up = set([spintax.spin("{a\||b\|}") for a in range(50)])
+        self.assertEqual(set_up, {'b|', 'a|'})
+
 
 if __name__ == '__main__':
     unittest.main()

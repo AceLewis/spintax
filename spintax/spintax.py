@@ -11,8 +11,9 @@ def _replace_string(match):
     :param match object:
     :return string:
     """
-    global spintax_seperator
-    random_picked = random.choice(re.findall(spintax_seperator, match.group(2)))
+    global spintax_seperator, random_string
+    test_string = re.sub(spintax_seperator, lambda x: x.group(1)+random_string, match.group(2))
+    random_picked = random.choice(re.split(random_string, test_string))
     return match.group(1) + random_picked + match.group(3)
 
 
@@ -24,6 +25,15 @@ def spin(string, seed=None):
     :return string:
     """
 
+    # As look behinds have to be a fixed width I need to do a "hack" where
+    # a temporary string is used. This string is randomly chosen. There are
+    # 1.9e62 possibilities for the random string and it uses uncommon Unicode
+    # characters, that is more possibilerties than number of Planck times that
+    # have passed in the universe so it is safe to do.
+    characters = [chr(x) for x in range(1234, 1368)]    
+    global random_string
+    random_string = ''.join(random.sample(characters, 30))
+    
     # If the user has chosen a seed for the random numbers use it
     if seed is not None:
         random.seed(seed)
@@ -31,7 +41,7 @@ def spin(string, seed=None):
     # Regex to find spintax seperator, defined here so it is not re-defined
     # on every call to _replace_string function
     global spintax_seperator
-    spintax_seperator = r"(?:\\.|[^\|\\])+|(?<=[^\\]\|)|(?<!.)(?=\|)|(?<!.)(?=\|)|(?<=\|)(?=\|)"
+    spintax_seperator = r'((?:(?<!\\)(?:\\\\)*))(\|)'
     spintax_seperator = re.compile(spintax_seperator)
 
     # Regex to find all non escaped spintax brackets
