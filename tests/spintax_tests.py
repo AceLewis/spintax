@@ -46,6 +46,14 @@ class TestSpintax(unittest.TestCase):
     def test_escaped_pipe_at_end(self):
         set_up = set([spintax.spin("{a\||b\|}") for a in range(50)])
         self.assertEqual(set_up, {'b|', 'a|'})
+    
+    def test_escaped_at_end(self):
+        set_up = set([spintax.spin(r"{|a\\}") for a in range(50)])
+        self.assertEqual(set_up, {'', 'a\\'})
+
+    def test_escaped_at_end_only_one(self):
+        set_up = set([spintax.spin(r"{a\\}") for a in range(50)])
+        self.assertEqual(set_up, {'a\\'})
 
 
 if __name__ == '__main__':

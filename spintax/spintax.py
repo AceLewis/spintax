@@ -17,8 +17,9 @@ def _replace_string(match):
     """
     global spintax_seperator, random_string
     test_string = re.sub(spintax_seperator, lambda x: x.group(1)+random_string, match.group(2))
-    random_picked = random.choice(re.split(random_string, test_string))
-    return match.group(1) + random_picked + match.group(3)
+    split_strings = re.split(random_string, test_string)
+    random_picked = random.choice(split_strings)
+    return match.group(1) + random_picked + ['', match.group(3)][random_picked==split_strings[-1]]
 
 
 def spin(string, seed=None):
