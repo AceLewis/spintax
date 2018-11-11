@@ -6,8 +6,8 @@ import warnings
 warnings.simplefilter('always', DeprecationWarning)
 
 if sys.version_info[0] == 2:
-	# If Python 2 use unicode character conversion
-	chr = unichr
+    # If Python 2 use unicode character conversion
+    chr = unichr
 
 def _replace_string(match):
     """
