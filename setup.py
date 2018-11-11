@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='spintax',
-      version='1.0.3',
+      version='1.0.4',
       description='A Python module for parsing spintax',
       long_description='A Python module for parsing spintax, unlike any other module this works with nested spintax and also allows the user to escape the special characters used in its syntax.',
       keywords=['spintax', 'spin syntax', 'spintax parser', 'spinning', 'spin'],
