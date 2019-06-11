@@ -1,6 +1,34 @@
 import logging
+import ast
+import operator
+
+_OP_MAP = {
+    ast.Add: operator.add,
+    ast.Sub: operator.sub,
+    ast.Mult: operator.mul,
+}
 
 logger = logging.getLogger(__name__)
+
+
+class Calc(ast.NodeVisitor):
+
+    def visit_BinOp(self, node):
+        left = self.visit(node.left)
+        right = self.visit(node.right)
+        return _OP_MAP[type(node.op)](left, right)
+
+    def visit_Num(self, node):
+        return node.n
+
+    def visit_Expr(self, node):
+        return self.visit(node.value)
+
+    @classmethod
+    def evaluate(cls, expression):
+        tree = ast.parse(expression)
+        calc = cls()
+        return calc.visit(tree.body[0])
 
 
 def _convert_spin(spin_text):
@@ -90,7 +118,7 @@ def calculate_possibilities(spin_text):
         # to see every step of the processing
         # logger.debug(''.join(operation))
 
-    result = eval(''.join(operation))
+    result = Calc.evaluate(''.join(operation))
     logger.debug(''.join(operation))
     logger.debug(result)
     return result
