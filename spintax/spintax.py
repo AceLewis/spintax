@@ -40,8 +40,7 @@ def spin(string, seed=None):
     random_string = ''.join(random.sample(characters, 30))
     
     # If the user has chosen a seed for the random numbers use it
-    if seed is not None:
-        random.seed(seed)
+    random.seed(seed)
 
     # Regex to find spintax seperator, defined here so it is not re-defined
     # on every call to _replace_string function
